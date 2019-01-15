@@ -1,0 +1,77 @@
+// sass --no-cache --sourcemap=none --watch style.scss:style.css --style expanded
+
+$breakpoints: (
+	'full': 1920px,
+	'xl': 1680px,
+	'macbook': 1440px,
+	'ipad-pro': 1366px,
+	'desktop': 1024px,
+	'tablet': 768px,
+	'phone': 667px,
+	'xs-phone': 375px,
+);
+
+//-----on/off creating grid class
+$enable-grid-class: true;
+
+@import "sass/include-media";
+@import "sass/smart-grid";
+@import "sass/grid-points";
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+.container {
+	max-width: 1300px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #ccc;
+	padding: 1px 50px;
+}
+
+.promo {
+	&__grid {
+		@include flex();
+	}
+
+	&__col-1 {
+		@include col();
+		@include size(6);
+		@include size-lg(7);
+		@include size-md(8);
+		@include size-sm(9);
+		@include size-xs(6);
+		padding: 20px;
+		margin-bottom: 20px;
+		background-color: blue;
+	}
+
+	&__col-2 {
+		@include col();
+		@include size(6);
+		@include size-lg(5);
+		@include size-md(4);
+		@include size-sm(3);
+		@include size-xs(6);
+		padding: 20px;
+		margin-bottom: 20px;
+		background-color: tomato;
+	}
+}
+//test
+.test-col-1 {
+	padding: 20px;
+	margin-bottom: 20px;
+	background-color: blue;
+}
+.test-col-2 {
+	padding: 20px;
+	margin-bottom: 20px;
+	background-color: tomato;
+}

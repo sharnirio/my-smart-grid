@@ -1,0 +1,50 @@
+$enable-grid-class: true !default;
+
+@if $enable-grid-class {
+	.row {
+		@include flex();
+	}
+
+	%grid-column {
+		@include col();
+	}
+
+	@for $i from $columns through 1 {
+
+		// тело цикла
+		.col-#{$i} {
+			@extend %grid-column;
+			@include size($i);
+		}
+	}
+
+	@for $i from $columns through 1 {
+		.col-lg-#{$i} {
+			@extend %grid-column;
+			@include size-lg($i);
+		}
+	}
+
+	@for $i from $columns through 1 {
+		.col-md-#{$i} {
+			@extend %grid-column;
+			@include size-md($i);
+		}
+	}
+
+	@for $i from $columns through 1 {
+		.col-sm-#{$i} {
+			@extend %grid-column;
+			@include size-sm($i);
+		}
+	}
+
+	@for $i from $columns through 1 {
+		.col-xs-#{$i} {
+			@extend %grid-column;
+			@include size-xs($i);
+		}
+	}
+
+//end @if
+}

@@ -1,0 +1,127 @@
+// переделал для работы с рабочим объектом $breakpoints с контрольными точками
+
+$break_lg: map-get($breakpoints, macbook);
+$break_md: map-get($breakpoints, desktop);
+$break_sm: map-get($breakpoints, tablet);
+$break_xs: map-get($breakpoints, xs-phone);
+
+$columns: 12;
+
+$offset: 50px;
+$offset_lg: 40px;
+$offset_md: 30px;
+$offset_sm: 20px;
+$offset_xs: 10px;
+
+@mixin flex(){
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: (($offset / 2) * -1);
+	margin-right: (($offset / 2) * -1);
+	@if ($offset != $offset_lg) {
+		@include media("<=macbook") {
+			margin-left: (($offset_lg / 2) * -1);
+			margin-right: (($offset_lg / 2) * -1);
+		}
+	}
+	@if ($offset != $offset_md) {
+		@include media("<=desktop") {
+			margin-left: (($offset_md / 2) * -1);
+			margin-right: (($offset_md / 2) * -1);
+		}
+	}
+	@if ($offset != $offset_sm) {
+		@include media("<=tablet") {
+			margin-left: (($offset_sm / 2) * -1);
+			margin-right: (($offset_sm / 2) * -1);
+		}
+	}
+	@if ($offset != $offset_xs) {
+		@include media("<=xs-phone") {
+			margin-left: (($offset_xs / 2) * -1);
+			margin-right: (($offset_xs / 2) * -1);
+		}
+	}
+}
+
+@mixin col(){
+	word-wrap: break-word;
+	margin-left: ($offset / 2);
+	margin-right: ($offset / 2);
+	//для гибкости колонок flex-grow
+	flex-grow: 1;
+	@if ($offset != $offset_lg) {
+		@include media("<=macbook") {
+			margin-left: ($offset_lg / 2);
+			margin-right: ($offset_lg / 2);
+		}
+	}
+	@if ($offset != $offset_md) {
+		@include media("<=desktop") {
+			margin-left: ($offset_md / 2);
+			margin-right: ($offset_md / 2);
+		}
+	}
+	@if ($offset != $offset_sm) {
+		@include media("<=tablet") {
+			margin-left: ($offset_sm / 2);
+			margin-right: ($offset_sm / 2);
+		}
+	}
+	@if ($offset != $offset_lg) {
+		@include media("<=xs-phone") {
+			margin-left: ($offset_xs / 2);
+			margin-right: ($offset_xs / 2);
+		}
+	}
+
+}
+
+@mixin size($n){
+	$val: 100% / $columns * $n;
+	width: #{calc(#{$val} - #{$offset})};
+}
+
+@mixin size-lg($n){
+	$val: 100% / $columns * $n;
+	@include lg(width, #{calc(#{$val} - #{$offset_lg})});
+}
+
+@mixin size-md($n){
+	$val: 100% / $columns * $n;
+	@include md(width, #{calc(#{$val} - #{$offset_md})});
+}
+
+@mixin size-sm($n){
+	$val: 100% / $columns * $n;
+	@include sm(width, #{calc(#{$val} - #{$offset_sm})});
+}
+
+@mixin size-xs($n){
+	$val: 100% / $columns * $n;
+	@include xs(width, #{calc(#{$val} - #{$offset_xs})});
+}
+
+@mixin lg($name, $value){
+	@media screen and (max-width: $break_lg){
+		#{$name}: $value;
+	}
+}
+
+@mixin md($name, $value){
+	@media screen and (max-width: $break_md){
+		#{$name}: $value;
+	}
+}
+
+@mixin sm($name, $value){
+	@media screen and (max-width: $break_sm){
+		#{$name}: $value;
+	}
+}
+
+@mixin xs($name, $value){
+	@media screen and (max-width: $break_xs){
+		#{$name}: $value;
+	}
+}
